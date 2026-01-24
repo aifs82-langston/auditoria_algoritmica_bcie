@@ -252,6 +252,19 @@ if st.button('🚀 EJECUTAR AUDITORÍA COMPLETA', type="primary"):
         ax3.set_xticklabels(ax3.get_xticklabels(), rotation=45, ha='right')
         st.pyplot(fig3)
 
+        # Botón descarga
+        buffer = io.BytesIO()
+        with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
+            df_bcie.to_excel(writer, sheet_name='Data_Cruda', index=False)
+            pivot_monto_millones.to_excel(writer, sheet_name='Matriz_Montos')
+
+        st.download_button(
+            label="💾 Descargar Resultados Valor Promedio (Excel)",
+            data=buffer,
+            file_name="BCIE_ValorMedio_Resultados.xlsx",
+            mime="application/vnd.ms-excel"
+        )
+
         #st.markdown("""
         #**Hallazgo Clave:** * **Azul Intenso:** Operaciones de gran escala (ej. Apoyo Presupuestario en Costa Rica).
         #* **Azul Claro:** Capilaridad y cobertura territorial (ej. Infraestructura en Honduras/Nicaragua).

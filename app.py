@@ -232,7 +232,7 @@ if st.button('🚀 EJECUTAR AUDITORÍA COMPLETA', type="primary"):
         buffer = io.BytesIO()
         with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
             df_bcie.to_excel(writer, sheet_name='Data_Cruda', index=False)
-            pivot_monto_millones.to_excel(writer, sheet_name='Matriz_Montos')
+            pivot_monto_millones.to_excel(writer, sheet_name='Matriz_Vpromedio')
 
         st.download_button(
             label="💾 Descargar Resultados Financieros (Excel)",

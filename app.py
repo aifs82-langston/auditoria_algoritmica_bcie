@@ -198,12 +198,12 @@ if st.button('🚀 EJECUTAR AUDITORÍA COMPLETA', type="primary"):
         st.subheader("Figura 1. Auditoría Algorítmica: Espacio Latente de Operaciones en los países fundadores del BCIE")
         pca = PCA(n_components=2)
         coords = pca.fit_transform(embeddings)
-
+        
         fig1, ax1 = plt.subplots(figsize=(10, 6))
-
+        
         # Leyenda limpia
         etiquetas_plot = [f"C{k}: {feature_map[k][:30]}..." for k in df_bcie['Cluster_ID']]
-
+        
         sns.scatterplot(
             x=coords[:, 0], y=coords[:, 1],
             hue=etiquetas_plot,
@@ -214,8 +214,27 @@ if st.button('🚀 EJECUTAR AUDITORÍA COMPLETA', type="primary"):
         ax1.set_ylabel("Dimensión Latente 2")
         ax1.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
         st.pyplot(fig1)
+        
+        st.info("💡 **Interpretación:** Cada punto es un proyecto. La cercanía indica similitud semántica. Los grupos revelan la estructura funcional oculta de la cartera.")
 
-        #st.info("💡 **Interpretación:** Cada punto es un proyecto. La cercanía indica similitud semántica. Los grupos revelan la estructura funcional oculta de la cartera.")
+        # --- BOTÓN DE DESCARGA TAB 1 ---
+        # Preparamos un DataFrame especial que incluya las coordenadas matemáticas
+        df_export_pca = df_bcie.copy()
+        df_export_pca['Dim_Latente_X'] = coords[:, 0]
+        df_export_pca['Dim_Latente_Y'] = coords[:, 1]
+        df_export_pca['Etiqueta_Cluster'] = etiquetas_plot
+        
+        buffer_pca = io.BytesIO()
+        with pd.ExcelWriter(buffer_pca, engine='xlsxwriter') as writer:
+            df_export_pca.to_excel(writer, sheet_name='Datos_Espacio_Latente', index=False)
+            
+        st.download_button(
+            label="💾 Descargar Datos del Espacio Latente (Excel)",
+            data=buffer_pca,
+            file_name="BCIE_Espacio_Latente.xlsx",
+            mime="application/vnd.ms-excel"
+        )
+        
 
     # TAB 2: MATRIZ DE DESEMBOLSOS
     with tab2:
@@ -241,23 +260,35 @@ if st.button('🚀 EJECUTAR AUDITORÍA COMPLETA', type="primary"):
             mime="application/vnd.ms-excel"
         )
 
+    
     # TAB 3: VALOR PROMEDIO POR OPERACIÓN
     with tab3:
         st.subheader("Figura 3. Análisis de Escala: Valor Promedio por Operación en los países fundadores del BCIE")
-        fig3, ax3 = plt.subplots(figsize=(12, 6))
-
+        fig3, ax3 = plt.subplots(figsize=(12, 7))
+        
         # Heatmap Azul
         sns.heatmap(valor_promedio.fillna(0), annot=True, fmt=".2f", cmap="Blues", linewidths=1, ax=ax3)
         ax3.set_ylabel("Clúster Semántico")
+        
+        # Rotación de etiquetas
         ax3.set_xticklabels(ax3.get_xticklabels(), rotation=45, ha='right')
+        
         st.pyplot(fig3)
+        
 
 
-
-        #st.markdown("""
-        #**Hallazgo Clave:** * **Azul Intenso:** Operaciones de gran escala (ej. Apoyo Presupuestario en Costa Rica).
-        #* **Azul Claro:** Capilaridad y cobertura territorial (ej. Infraestructura en Honduras/Nicaragua).
-        #""")
+        # --- BOTÓN DE DESCARGA TAB 3 ---
+        buffer_avg = io.BytesIO()
+        with pd.ExcelWriter(buffer_avg, engine='xlsxwriter') as writer:
+            df_bcie.to_excel(writer, sheet_name='Data_Cruda', index=False)
+            valor_promedio.to_excel(writer, sheet_name='Matriz_Valor_Promedio')
+        
+        st.download_button(
+            label="💾 Descargar Matriz de Escala (Excel)",
+            data=buffer_avg,
+            file_name="BCIE_Analisis_Escala.xlsx",
+            mime="application/vnd.ms-excel"
+        )
 
     # TAB 4: CONTEXTO ODS (ArcGIS)
     with tab4:

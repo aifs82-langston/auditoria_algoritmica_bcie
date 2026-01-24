@@ -225,6 +225,7 @@ if st.button('🚀 EJECUTAR AUDITORÍA COMPLETA', type="primary"):
         # Heatmap Verde
         sns.heatmap(pivot_monto_millones, annot=True, fmt=".2f", cmap="Greens", linewidths=1, ax=ax2)
         ax2.set_ylabel("Clúster Semántico")
+        ax2.set_xticklabels(ax2.get_xticklabels(), rotation=45, ha='right')
         st.pyplot(fig2)
 
         # Botón descarga
@@ -248,6 +249,7 @@ if st.button('🚀 EJECUTAR AUDITORÍA COMPLETA', type="primary"):
         # Heatmap Azul
         sns.heatmap(valor_promedio.fillna(0), annot=True, fmt=".2f", cmap="Blues", linewidths=1, ax=ax3)
         ax3.set_ylabel("Clúster Semántico")
+        ax3.set_xticklabels(ax3.get_xticklabels(), rotation=45, ha='right')
         st.pyplot(fig3)
 
         st.markdown("""

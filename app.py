@@ -145,7 +145,7 @@ if st.button('▶️ EJECUTAR AUDITORÍA COMPLETA', type="primary"):
         status.update(label="✅ Datos descargados", state="complete", expanded=False)
 
     # --- PASO 2: MOTOR DE ALGORITMOS ---
-    with st.spinner("⚙️ Ejecutando algoritmos (S-BERT + K-Means++)..."):
+    with st.spinner("⚙️ Ejecutando algoritmos (S-BERT, K-Means++)..."):
         model = cargar_modelo_sbert()
         embeddings = model.encode(df_bcie['DESCRIPCION_PROYECTO'].tolist())
 

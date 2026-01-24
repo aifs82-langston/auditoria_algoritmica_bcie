@@ -187,10 +187,10 @@ if st.button('🚀 EJECUTAR AUDITORÍA COMPLETA', type="primary"):
     st.success("✅ Auditoría finalizada. Resultados listos.")
 
     tab1, tab2, tab3, tab4 = st.tabs([
-        "🌌 Espacio Latente de Operaciones en los países fundadores del BCIE",
-        "💰 Distribución de Recursos por Clúster Semántico en los países fundadores del BCIE",
-        "📏 Análisis de Escala: Valor Promedio por Operación en los países fundadores del BCIE",
-        "🌍 Índice de los ODS 2025 en los países fundadores del BCIE"
+        "🌌 Espacio Latente de Operaciones",
+        "💰 Distribución de Recursos por Clúster Semántico",
+        "📏 Análisis de Escala: Valor Promedio por Operación",
+        "🌍 Índice de los ODS 2025"
     ])
 
     # TAB 1: VISUALIZACIÓN ESPACIO LATENTE

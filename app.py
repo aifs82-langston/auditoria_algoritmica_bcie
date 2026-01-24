@@ -246,7 +246,7 @@ if st.button('🚀 EJECUTAR AUDITORÍA COMPLETA', type="primary"):
         fig3, ax3 = plt.subplots(figsize=(12, 6))
 
         # Heatmap Azul
-        sns.heatmap(ticket_promedio.fillna(0), annot=True, fmt=".2f", cmap="Blues", linewidths=1, ax=ax3)
+        sns.heatmap(valor_promedio.fillna(0), annot=True, fmt=".2f", cmap="Blues", linewidths=1, ax=ax3)
         ax3.set_ylabel("Clúster Semántico")
         st.pyplot(fig3)
 

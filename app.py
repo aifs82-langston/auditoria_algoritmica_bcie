@@ -215,7 +215,7 @@ if st.button('▶️ EJECUTAR AUDITORÍA COMPLETA', type="primary"):
         ax1.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
         st.pyplot(fig1)
         
-        st.info("💡 **Interpretación:** Cada punto es un proyecto. La cercanía indica similitud semántica. Los grupos revelan la estructura funcional oculta de la cartera.")
+        
 
         # --- BOTÓN DE DESCARGA TAB 1 ---
         # Preparamos un DataFrame especial que incluya las coordenadas matemáticas

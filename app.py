@@ -33,7 +33,7 @@ st.set_page_config(
 # Estilo de gráficos
 sns.set(style="whitegrid", context="talk")
 
-st.title("🏦 Auditoría Algorítmica del BCIE")
+st.title("🏦 Auditoría Algorítmica de los desembolsos del BCIE para los países fundadores")
 st.markdown("""
 **Auditoría Algorítmica de Datos Abiertos:**
 Esta aplicación conecta en tiempo real a las APIs del BCIE y del SDG Index, aplicando técnicas de vectorización semántica (S-BERT), minería de texto y aprendizaje no supervisado para auditar la estructura funcional y financiera de la cartera de proyectos.

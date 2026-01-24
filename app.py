@@ -129,7 +129,7 @@ def extraer_palabras_clave(texts, n=5):
 # ==========================================
 
 # Botón principal para iniciar todo el proceso
-if st.button('🚀 EJECUTAR AUDITORÍA COMPLETA', type="primary"):
+if st.button('▶️ EJECUTAR AUDITORÍA COMPLETA', type="primary"):
 
     # --- PASO 1: INGESTA BCIE ---
     with st.status("📡 Conectando a fuentes de datos...", expanded=True) as status:

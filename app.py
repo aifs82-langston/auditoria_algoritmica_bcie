@@ -40,7 +40,7 @@ Esta aplicación conecta en tiempo real a las APIs del BCIE y del SDG Index, apl
 **Por Alfredo Ibrahim Flores Sarria © 2026** 
 """)
 st.markdown("""
-**Por Alfredo Ibrahim Flores Sarria © 2026** 
+**Alfredo Ibrahim Flores Sarria © 2026** 
 """)
 
 # ==========================================

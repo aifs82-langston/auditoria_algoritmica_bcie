@@ -1,0 +1,10 @@
+streamlit
+pandas
+numpy
+requests
+matplotlib
+seaborn
+sentence-transformers
+scikit-learn
+xlsxwriter
+openpyxl

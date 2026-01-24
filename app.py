@@ -25,7 +25,7 @@ import os
 # 1. CONFIGURACIÓN DE LA PÁGINA Y ESTILO
 # ==========================================
 st.set_page_config(
-    page_title="Auditoría Algorítmica BCIE",
+    page_title="Auditoría algorítmica de los desemboldos del BCIE para los países fundadores",
     page_icon="🏦",
     layout="wide"
 )
@@ -35,9 +35,8 @@ sns.set(style="whitegrid", context="talk")
 
 st.title("🏦 Auditoría Algorítmica del BCIE")
 st.markdown("""
-**Herramienta de Análisis Forense de Datos:**
-Esta aplicación conecta en tiempo real a las APIs del BCIE y del SDG Index, procesa la cartera de proyectos
-mediante Inteligencia Artificial (S-BERT) y audita la asignación de recursos financieros.
+**Auditoría Algorítmica de Datos Abiertos:**
+Esta aplicación conecta en tiempo real a las APIs del BCIE y del SDG Index, aplicando técnicas de vectorización semántica (S-BERT), minería de texto y aprendizaje no supervisado para auditar la estructura funcional y financiera de la cartera de proyectos.
 """)
 
 # ==========================================
@@ -45,7 +44,7 @@ mediante Inteligencia Artificial (S-BERT) y audita la asignación de recursos fi
 # ==========================================
 
 @st.cache_resource
-def cargar_modelo_ia():
+def cargar_modelo_sbert():
     """Carga el modelo S-BERT en memoria (solo una vez)."""
     return SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')
 
@@ -145,9 +144,9 @@ if st.button('🚀 EJECUTAR AUDITORÍA COMPLETA', type="primary"):
 
         status.update(label="✅ Datos descargados", state="complete", expanded=False)
 
-    # --- PASO 2: MOTOR DE IA ---
-    with st.spinner("🧠 Ejecutando modelos de IA (S-BERT + K-Means)..."):
-        model = cargar_modelo_ia()
+    # --- PASO 2: MOTOR DE ALGORITMOS ---
+    with st.spinner("🧠 Ejecutando algoritmos (S-BERT + K-Means)..."):
+        model = cargar_modelo_sbert()
         embeddings = model.encode(df_bcie['DESCRIPCION_PROYECTO'].tolist())
 
         # Clustering
@@ -176,27 +175,27 @@ if st.button('🚀 EJECUTAR AUDITORÍA COMPLETA', type="primary"):
         # Millones
         pivot_monto_millones = pivot_monto / 1_000_000
 
-        # Ticket Promedio
-        ticket_promedio = pivot_monto_millones / pivot_conteo
+        # Valor promedio por operación
+        valor_promedio = pivot_monto_millones / pivot_conteo
 
         # Renombrar índices para visualización
         etiquetas_legibles = [f"C{i}\n({feature_map[i][:25]}...)" for i in pivot_monto.index]
         pivot_monto_millones.index = etiquetas_legibles
-        ticket_promedio.index = etiquetas_legibles
+        valor_promedio.index = etiquetas_legibles
 
     # --- INTERFAZ DE RESULTADOS (TABS) ---
     st.success("✅ Auditoría finalizada. Resultados listos.")
 
     tab1, tab2, tab3, tab4 = st.tabs([
-        "🌌 Espacio Latente (IA)",
+        "🌌 Espacio Latente",
         "💰 Matriz Financiera",
         "📏 Análisis de Escala",
         "🌍 Contexto ODS"
     ])
 
-    # TAB 1: VISUALIZACIÓN IA
+    # TAB 1: VISUALIZACIÓN ESPACIO LATENTE
     with tab1:
-        st.subheader("Figura 1. Auditoría Algorítmica: Espacio Latente")
+        st.subheader("Figura 1. Auditoría Algorítmica: Espacio Latente de Operaciones en los países fundadores del BCIE")
         pca = PCA(n_components=2)
         coords = pca.fit_transform(embeddings)
 
@@ -220,7 +219,7 @@ if st.button('🚀 EJECUTAR AUDITORÍA COMPLETA', type="primary"):
 
     # TAB 2: MATRIZ DE DESEMBOLSOS
     with tab2:
-        st.subheader("Figura 2. Distribución de Recursos (Millones USD)")
+        st.subheader("Figura 2. Distribución de Recursos por Clúster Semántico en los países fundadores del BCIE")
         fig2, ax2 = plt.subplots(figsize=(12, 6))
 
         # Heatmap Verde
@@ -241,9 +240,9 @@ if st.button('🚀 EJECUTAR AUDITORÍA COMPLETA', type="primary"):
             mime="application/vnd.ms-excel"
         )
 
-    # TAB 3: TICKET PROMEDIO
+    # TAB 3: VALOR PROMEDIO POR OPERACIÓN
     with tab3:
-        st.subheader("Figura 3. Análisis de Escala: Valor Promedio por Operación")
+        st.subheader("Figura 3. Análisis de Escala: Valor Promedio por Operación en los países fundadores del BCIE")
         fig3, ax3 = plt.subplots(figsize=(12, 6))
 
         # Heatmap Azul
@@ -258,7 +257,7 @@ if st.button('🚀 EJECUTAR AUDITORÍA COMPLETA', type="primary"):
 
     # TAB 4: CONTEXTO ODS (ArcGIS)
     with tab4:
-        st.subheader("Figura 4. Índice de los ODS 2025 (Contexto Macroeconómico)")
+        st.subheader("Figura 4. Países fundadores del BCIE: Índice de los ODS 2025")
 
         with st.spinner("Conectando a ArcGIS..."):
             df_sdg = cargar_datos_sdg()

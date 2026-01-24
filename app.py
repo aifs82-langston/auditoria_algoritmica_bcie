@@ -215,7 +215,7 @@ if st.button('🚀 EJECUTAR AUDITORÍA COMPLETA', type="primary"):
         ax1.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
         st.pyplot(fig1)
 
-        st.info("💡 **Interpretación:** Cada punto es un proyecto. La cercanía indica similitud semántica. Los grupos revelan la estructura funcional oculta de la cartera.")
+        #st.info("💡 **Interpretación:** Cada punto es un proyecto. La cercanía indica similitud semántica. Los grupos revelan la estructura funcional oculta de la cartera.")
 
     # TAB 2: MATRIZ DE DESEMBOLSOS
     with tab2:
@@ -252,10 +252,10 @@ if st.button('🚀 EJECUTAR AUDITORÍA COMPLETA', type="primary"):
         ax3.set_xticklabels(ax3.get_xticklabels(), rotation=45, ha='right')
         st.pyplot(fig3)
 
-        st.markdown("""
-        **Hallazgo Clave:** * **Azul Intenso:** Operaciones de gran escala (ej. Apoyo Presupuestario en Costa Rica).
-        * **Azul Claro:** Capilaridad y cobertura territorial (ej. Infraestructura en Honduras/Nicaragua).
-        """)
+        #st.markdown("""
+        #**Hallazgo Clave:** * **Azul Intenso:** Operaciones de gran escala (ej. Apoyo Presupuestario en Costa Rica).
+        #* **Azul Claro:** Capilaridad y cobertura territorial (ej. Infraestructura en Honduras/Nicaragua).
+        #""")
 
     # TAB 4: CONTEXTO ODS (ArcGIS)
     with tab4:

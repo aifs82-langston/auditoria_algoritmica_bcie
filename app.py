@@ -293,7 +293,7 @@ if st.button('▶️ EJECUTAR AUDITORÍA COMPLETA', type="primary"):
             mime="application/vnd.ms-excel"
         )
 
-    # TAB 4: CONTEXTO ODS (ArcGIS)
+# TAB 4: CONTEXTO ODS (ArcGIS)
     with tab4:
         st.subheader("Figura 4. Países fundadores del BCIE: Índice de los ODS 2025")
 
@@ -319,8 +319,32 @@ if st.button('▶️ EJECUTAR AUDITORÍA COMPLETA', type="primary"):
                              f'{width:.1f}', va='center', fontweight='bold')
 
                 st.pyplot(fig4)
+                
+                # --- NUEVA SECCIÓN: MOSTRAR DATOS Y BOTÓN DE DESCARGA ---
+                st.markdown("### Datos extraídos:")
+                
+                # Filtramos las columnas de interés
+                df_export_sdg = df_sdg_filt[['Name', 'Overall_Score', 'Overall_Rank']].copy()
+                
+                # Opcional: Mejorar el formato para la vista en pantalla y Excel
+                df_export_sdg['Overall_Score'] = df_export_sdg['Overall_Score'].round(2)
+                # Convertimos el ranking a número entero, manejando posibles valores nulos
+                df_export_sdg['Overall_Rank'] = pd.to_numeric(df_export_sdg['Overall_Rank'], errors='coerce').fillna(0).astype(int)
+                
+                # Mostramos la tabla en la interfaz de Streamlit
+                st.dataframe(df_export_sdg, use_container_width=True)
+
+                # Preparamos el buffer para la descarga en Excel
+                buffer_sdg = io.BytesIO()
+                with pd.ExcelWriter(buffer_sdg, engine='xlsxwriter') as writer:
+                    df_export_sdg.to_excel(writer, sheet_name='Indice_ODS_2025', index=False)
+                
+                st.download_button(
+                    label="💾 Descargar Datos ODS (Excel)",
+                    data=buffer_sdg,
+                    file_name="BCIE_Indice_ODS_2025.xlsx",
+                    mime="application/vnd.ms-excel"
+                )
+
             else:
                 st.warning("No se pudieron recuperar los datos del SDG Index en este momento.")
-
-else:
-    st.info("👈 Haz clic en el botón para iniciar la auditoría en tiempo real.")

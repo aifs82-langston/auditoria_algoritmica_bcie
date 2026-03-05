@@ -31,6 +31,8 @@ st.markdown("""
 **Auditoría algorítmica de datos abiertos:**
 Esta aplicación conecta en tiempo real a las APIs del BCIE y del SDG Index, aplicando técnicas de vectorización semántica (S-BERT), minería de texto y aprendizaje no supervisado para auditar la estructura funcional y financiera de la cartera de proyectos de los países fundadores para el período 2010-2024.
 """)
+
+st.markdown("[Haz clic aquí para acceder al artículo en Substack](https://open.substack.com/pub/aifloressarria/p/el-mapa-oculto-del-desarrollo-como?utm_campaign=post-expanded-share&utm_medium=web)")
 st.markdown("""
 **Alfredo Ibrahim Flores Sarria © 2026** 
 """)

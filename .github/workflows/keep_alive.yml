@@ -4,13 +4,13 @@ on:
   schedule:
     # Se ejecuta cada 30 minutos
     - cron: '*/30 * * * *'
-  workflow_dispatch: # Esto permite que lo pruebes tú manualmente
+  workflow_dispatch: 
 
 jobs:
   ping_job:
     runs-on: ubuntu-latest
     steps:
-      - name: Enviando señal a la WebApp
+      - name: Enviando señal de vida mejorada
         run: |
-          curl -sL https://auditoriaalgoritmicabcie-fzbts4wwdh68ewnvatfypw.streamlit.app/ > /dev/null
-          echo "Señal enviada con éxito el $(date)"
+          curl -I -s -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36" https://auditoriaalgoritmicabcie-fzbts4wwdh68ewnvatfypw.streamlit.app/
+          echo "Ping enviado con éxito el $(date)"

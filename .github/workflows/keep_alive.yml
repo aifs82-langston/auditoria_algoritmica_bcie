@@ -1,0 +1,16 @@
+name: Despertador Automático Streamlit
+
+on:
+  schedule:
+    # Se ejecuta cada 30 minutos
+    - cron: '*/30 * * * *'
+  workflow_dispatch: # Esto permite que lo pruebes tú manualmente
+
+jobs:
+  ping_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Enviando señal a la WebApp
+        run: |
+          curl -sL https://auditoriaalgoritmicabcie-fzbts4wwdh68ewnvatfypw.streamlit.app/ > /dev/null
+          echo "Señal enviada con éxito el $(date)"

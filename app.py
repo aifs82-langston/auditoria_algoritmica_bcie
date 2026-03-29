@@ -1,5 +1,4 @@
 
-
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -13,9 +12,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 import textwrap
 import io
 import os
-from streamlit_autorefresh import st_autorefresh
-
-count = st_autorefresh(interval=1200000, limit=100, key="freshed")
 
 # ==========================================
 # 1. CONFIGURACIÓN DE LA PÁGINA Y ESTILO

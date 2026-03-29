@@ -8,4 +8,4 @@ sentence-transformers
 scikit-learn
 xlsxwriter
 openpyxl
-streamlit-autorefresh
+
